@@ -32,3 +32,7 @@ erDiagram
     NOTETAGREL }o--o| TAG: ""
     NOTETAGREL }o--o| NOTE: ""
 ```
+
+# Endpoints
+
+- 
