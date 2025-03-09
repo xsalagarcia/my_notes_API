@@ -12,7 +12,7 @@ router = APIRouter(prefix="/category")
 
 @router.get("", response_model=list[Category])
 @service_errors_handler
-def get_categories(cookie: Annotated[str, Depends(check_admin_session)]):
+def get_categories():
     return service.get_categories()
 
 

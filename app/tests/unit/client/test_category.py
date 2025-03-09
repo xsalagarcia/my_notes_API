@@ -29,24 +29,15 @@ class TestAuth(unittest.TestCase):
 
     @patch("app.service.category.get_categories")  # 0
     def test_get_categories(self, *args: MagicMock):
-        app.dependency_overrides[check_admin_session] = check_admin_session_mocked_ok
         cat_list = [Category(id=1, name="cat 1"), Category(id=2, name="cat 2")]
         args[0].return_value = cat_list
-        response = self.client.get(url="/category", cookies={"admin_session": "the cookie content"})
+        response = self.client.get(url="/category")
         self.assertEqual(200, response.status_code)
         fetched_cat_list = [Category(**cat) for cat in response.json()]
         self.assertEqual(fetched_cat_list, cat_list)
         args[0].assert_called_once()
         args[1].assert_not_called()
         args[2].assert_called_once_with(ip="testclient")
-
-        [arg.reset_mock() for arg in args]
-
-        # There is no cookie
-        self.client.cookies.delete("admin_session")
-        response = self.client.get(url="/category")
-        self.assertEqual(response.status_code, 403)
-        self.assertEqual(response.json(), {"detail": "Not authenticated"})
 
         [arg.reset_mock() for arg in args]
 
