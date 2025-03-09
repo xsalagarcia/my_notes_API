@@ -3,6 +3,8 @@ from redis import Redis
 from sqlmodel import create_engine, SQLModel
 
 from app.settings.settings import settings
+#tables
+from app.models.category import Category
 
 redis_data = Redis(host=settings.redis_host,
                    port=settings.redis_port,

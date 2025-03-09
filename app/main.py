@@ -4,12 +4,13 @@ import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
 
-from app.router import auth
+from app.router import auth, category
 from app.settings.settings import settings
 from app.service import middleware as middleware_service
 
 app = FastAPI(title="Public notes", redoc_url=None, docs_url=settings.notes_swagger)
 app.include_router(auth.router)
+app.include_router(category.router)
 
 
 @app.middleware("http")

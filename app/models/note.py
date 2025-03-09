@@ -10,4 +10,4 @@ class Note(SQLModel, table=True):
     last_updated: datetime = Field()
     abstract: str = Field(max_length=256)
     is_public: bool = Field()
-    category_id: int = Field(foreign_key="note.id", ondelete="CASCADE")
+    category_id: int = Field(foreign_key="note.id", ondelete="RESTRICT")

@@ -1,3 +1,5 @@
+from typing import Annotated
+
 from fastapi import Depends, HTTPException
 from passlib.context import CryptContext
 from fastapi.security import APIKeyCookie
@@ -8,6 +10,7 @@ from app.data import cache
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 cookie_admin_session_scheme = APIKeyCookie(name="admin_session")
+cookie_admin_session_scheme_no_error = APIKeyCookie(name="admin_session", auto_error=False)
 
 
 def set_admin_session(username: str, password: str) -> str:
@@ -24,7 +27,7 @@ def set_admin_session(username: str, password: str) -> str:
         return cache.set_admin_session()
 
 
-def check_admin_session(cookie: str = Depends(cookie_admin_session_scheme)) -> str:
+def check_admin_session(cookie: Annotated[str, Depends(cookie_admin_session_scheme)]) -> str:
     """
     HTTPException with 403 if there is no cookie or there is no cache. Otherwise, returns the cookie content.
     :param cookie:

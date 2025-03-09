@@ -14,6 +14,9 @@ class MiddlewareSettings(BaseModel):
     ip_blocked_expires_minutes: int = 60
     max_ip_fail_logins: int = 10
 
+class DatabaseSettings(BaseModel):
+    connect_args: dict[str, type] = {}  # check_same_thread: False
+    echo: bool = False
 
 class Settings(BaseSettings):
     admin_name: str
@@ -27,6 +30,7 @@ class Settings(BaseSettings):
 
     app_settings: AppSettings = AppSettings()
     middleware_settings: MiddlewareSettings = MiddlewareSettings()
+    database_settings: DatabaseSettings = DatabaseSettings()
 
     model_config = SettingsConfigDict(env_file=Path(app.__file__).parent.parent.joinpath(".env"),
                                       env_file_encoding="utf-8")
