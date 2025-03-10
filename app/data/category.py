@@ -1,4 +1,4 @@
-from typing import Sequence
+from collections.abc import Sequence
 
 from sqlalchemy.exc import IntegrityError
 from sqlmodel import Session, select

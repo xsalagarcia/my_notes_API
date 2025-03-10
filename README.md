@@ -10,17 +10,18 @@ erDiagram
         datetime last_updated
         string abstract
         bool is_public
-        int category_id FK "to SECTION"
+        int category_id FK "to CATEGORY"
     }
     CATEGORY {
         int id
-        string name
+        string name UK
     }
 
     
     TAG {
         int id
-        string name
+        string name UK "UK with category_id"
+        int category_id UK, FK "FK to CATEGORY, UK with name"
     }
     
     NOTETAGREL {
