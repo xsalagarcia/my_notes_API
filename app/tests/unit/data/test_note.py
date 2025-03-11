@@ -16,8 +16,6 @@ class TestCategory(unittest.TestCase):
         restart_db_and_tables()
         self.cat1 = category_data.create_category(Category(name="Category 1"))
         self.cat2 = category_data.create_category(Category(name="Category 2"))
-        #self.tags_cat1 = [tag_data.create_tag(Tag(name=f"tag {i}", category_id=self.cat1.id)) for i in range(5)]
-        #self.tags_cat2 = [tag_data.create_tag(Tag(name=f"tag {i}", category_id=self.cat2.id)) for i in range(5)]
 
     def test_create_and_get_note(self):
         note1 = data.create_note(note=Note(name="note 1", abstract="my first note",
@@ -88,30 +86,3 @@ class TestCategory(unittest.TestCase):
         self.assertEqual(2, len(tag_data.get_tags_by_cat(self.cat1.id)))  # Tag is not removed
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-        #note2 = data.create_note(note=Note(name="Another note", abstract="my first note",
-        #                                   is_public=False, category_id=self.cat1.id),
-        #                         tags=[Tag(**tag.model_dump()) for tag in [self.tags_cat1[2]]])
-        #note3 = data.create_note(note=Note(name="note for cat 2", abstract="my first note",
-        #                                   is_public=True, category_id=self.cat2.id),
-        #                         tags=[Tag(**tag.model_dump()) for tag in self.tags_cat2[0:2]])
-        ## This should raise an error because note category is not the same that tags categories.
-        #with self.assertRaises(DatabaseError) as e:
-        #    data.create_note(note=Note(name="note 4", abstract="my first note",
-        #                               is_public=True, category_id=self.cat2.id),
-        #                     tags=[Tag(**tag.model_dump()) for tag in self.tags_cat1[0:2]])
-#
-#notes = data.get_notes_by_cat(category_id=self.cat1.id)
-#print(notes[0].tags)

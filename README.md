@@ -49,3 +49,9 @@ erDiagram
 ## Endpoints
 
 Autodocumented. See swagger ui.
+
+# Running all unit tests from CLI
+Better to set the environment variable IN_MEMORY_DB="Yes":
+```sh
+env IN_MEMORY_DB="Yes" python -m unittest
+```

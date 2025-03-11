@@ -1,5 +1,5 @@
 import unittest
-
+import app.tests.unit.data  # sets IN_MEMORY_DB environment variable.
 from app.data import restart_db_and_tables, tag as data, category as category_data
 from app.models.category import Category
 from app.models.tag import Tag

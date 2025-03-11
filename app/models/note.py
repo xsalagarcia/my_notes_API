@@ -16,7 +16,7 @@ class Note(SQLModel, table=True):
     last_updated: datetime = Field(default_factory=datetime.now)
     abstract: str = Field(max_length=256)
     is_public: bool = Field()
-    category_id: int = Field(foreign_key="note.id", ondelete="RESTRICT")
+    category_id: int = Field(foreign_key="note.id", ondelete="CASCADE")
 
     tags: list["Tag"] = Relationship(back_populates="notes", link_model=NoteTagLink)
 
