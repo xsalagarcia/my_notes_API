@@ -36,14 +36,14 @@ erDiagram
         int category_id UK, FK "FK to CATEGORY, UK with name"
     }
     
-    NOTETAGREL {
+    NOTETAGLINK {
         int id
         int tag_id FK "to TAG"
         int note_id FK "to NOTE"
     }
     CATEGORY ||--o{ NOTE : ""
-    NOTETAGREL }o--o| TAG: ""
-    NOTETAGREL }o--o| NOTE: ""
+    NOTETAGLINK }o--o| TAG: ""
+    NOTETAGLINK }o--o| NOTE: ""
 ```
 
 ## Endpoints

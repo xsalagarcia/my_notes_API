@@ -7,6 +7,8 @@ from app.settings.settings import settings
 #tables
 from app.models.category import Category
 from app.models.tag import Tag
+from app.models.note import Note
+from app.models.notetaglink import NoteTagLink
 
 redis_data = Redis(host=settings.redis_host,
                    port=settings.redis_port,
@@ -38,3 +40,5 @@ def create_db_and_tables():
 def restart_db_and_tables():
     SQLModel.metadata.drop_all(engine)
     create_db_and_tables()
+
+create_db_and_tables()

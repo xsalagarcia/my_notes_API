@@ -12,7 +12,7 @@ router = APIRouter(prefix="/tag")
 
 @router.get("/", response_model=list[Tag])
 @service_errors_handler
-def get_tag(category_id: int):
+def get_tags_by_cat(category_id: int):
     return service.get_tags_by_category(category_id=category_id)
 
 

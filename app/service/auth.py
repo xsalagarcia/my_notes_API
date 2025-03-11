@@ -39,5 +39,15 @@ def check_admin_session(cookie: Annotated[str, Depends(cookie_admin_session_sche
     return in_cache
 
 
+def is_admin_logged(cookie: Annotated[str, Depends(cookie_admin_session_scheme_no_error)]) -> bool:
+    """
+    Returns true if admin is logged, otherwise false.
+    :param cookie:
+    :return:
+    """
+    in_cache = cache.get_admin_session()
+    return in_cache is not None and in_cache == cookie
+
+
 def del_admin_session(cookie):
     cache.del_admin_session(cookie=cookie)
