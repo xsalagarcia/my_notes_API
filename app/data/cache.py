@@ -24,8 +24,8 @@ def get_admin_session() -> str | None:
     return redis_data.get(name="admin_session")
 
 
-def del_admin_session(cookie: str):
-    redis_data.delete(name="admin")
+def del_admin_session():
+    redis_data.delete("admin_session")
 
 
 def get_ip_in_surveillance(ip: str) -> IpInSurveillance | None:
@@ -39,7 +39,4 @@ def get_ip_in_surveillance(ip: str) -> IpInSurveillance | None:
 def create_or_update_ip_in_surveillance(ip_in_surveillance: IpInSurveillance):
     redis_data.hset(ip_in_surveillance.ip, mapping=ip_in_surveillance.model_dump(exclude={"ip"}))
     redis_data.expire(ip_in_surveillance.ip, settings.middleware_settings.ip_blocked_expires_minutes * 60)
-
-
-
 

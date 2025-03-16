@@ -22,8 +22,8 @@ def login(username: Annotated[str, Form()], password: Annotated[str, Form()]):
 
 @router.get("/logout")
 @service_errors_handler
-def logout(cookie: Annotated[str,Depends(service.check_admin_session)]):
-    service.del_admin_session(cookie=cookie)
+def logout(cookie: Annotated[str, Depends(service.check_admin_session)]):
+    service.del_admin_session()
     jr = JSONResponse("Logged out")
 
     jr.delete_cookie(key="admin_session")

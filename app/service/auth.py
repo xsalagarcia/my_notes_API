@@ -49,5 +49,5 @@ def is_admin_logged(cookie: Annotated[str, Depends(cookie_admin_session_scheme_n
     return in_cache is not None and in_cache == cookie
 
 
-def del_admin_session(cookie):
-    cache.del_admin_session(cookie=cookie)
+def del_admin_session():
+    cache.del_admin_session()

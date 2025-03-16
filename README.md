@@ -1,14 +1,14 @@
 # API to serve notes in markdown
 
-This will be a simple API to serve docs in markdown. Not still functional. [TODO list](#todo-list)
-express what is needed. 
+This will be a simple API to serve docs in markdown. 
 
 ## TODO list
 
-- note-tag-relationship management.
-- files management.
+- Deployment
 
-### More advanced TODO list
+
+
+### Wish list 
 
 - Auto-categorization and auto-tag of uploaded markdowns.
 
