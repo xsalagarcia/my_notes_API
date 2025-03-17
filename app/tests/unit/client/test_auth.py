@@ -46,7 +46,7 @@ class TestAuth(unittest.TestCase):
         args[1].return_value = "cookie content"
         self.client.cookies.set(name="admin_session", value="cookie content")
         response = self.client.get("/auth/logout")
-        args[0].assert_called_once_with(cookie="cookie content")
+        args[0].assert_called_once_with()
         self.assertIsNone(response.cookies.get("admin_session"))
         args[2].assert_not_called()
         args[3].assert_called_once_with(ip="testclient")
