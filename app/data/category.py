@@ -1,11 +1,13 @@
 from collections.abc import Sequence
 
 from sqlalchemy.exc import IntegrityError
-from sqlmodel import Session, select
+from sqlalchemy.orm import selectinload, joinedload
+from sqlmodel import Session, select, col
 
 from app.data import engine
 from app.exceptions.database import DatabaseError
 from app.models.category import Category
+from app.models.note import Note
 
 
 def create_category(category: Category) -> Category:
@@ -50,3 +52,15 @@ def get_categories() -> Sequence[Category]:
     """
     with Session(engine) as session:
         return session.exec(select(Category).order_by(Category.name)).all()
+
+
+def get_all(only_public_notes: bool) -> Sequence[Category]:
+    with Session(engine) as session:
+        statement = select(Category).order_by(Category.name).options(
+            joinedload(Category.notes).options(
+                selectinload(Note.tags)))
+
+        if only_public_notes:
+            statement = statement.where(col(Note.is_public).is_(True))
+
+        return session.exec(statement).unique().all()

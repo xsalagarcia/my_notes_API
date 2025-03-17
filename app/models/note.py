@@ -4,6 +4,7 @@ from pydantic import BaseModel
 from sqlmodel import SQLModel, Field, Relationship
 from datetime import datetime
 
+from .category import Category
 from .notetaglink import NoteTagLink
 
 if TYPE_CHECKING:
@@ -16,9 +17,10 @@ class Note(SQLModel, table=True):
     last_updated: datetime = Field(default_factory=datetime.now)
     abstract: str = Field(max_length=256)
     is_public: bool = Field()
-    category_id: int = Field(foreign_key="note.id", ondelete="CASCADE")
+    category_id: int = Field(foreign_key="category.id", ondelete="CASCADE")
 
     tags: list["Tag"] = Relationship(back_populates="notes", link_model=NoteTagLink)
+    category: Category = Relationship(back_populates="notes")
 
 class TagInNoteResponse(BaseModel):
     id: int
