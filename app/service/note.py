@@ -18,7 +18,6 @@ async def create_note(note: Note, tag_names: list[str], file: UploadFile) -> Not
     async with aiofiles.open(file=files_folder.joinpath(note.name), mode="wb") as f:
         content = await file.read()
         await f.write(content)
-
     return data.create_note(note=note, tag_names=tag_names)
 
 

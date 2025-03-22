@@ -3,6 +3,7 @@ import asyncio
 import uvicorn
 from fastapi import FastAPI, Request
 from fastapi.responses import JSONResponse
+from fastapi.middleware.cors import CORSMiddleware
 
 from app.router import auth, category, tag, note
 from app.settings.settings import settings
@@ -14,7 +15,13 @@ app.include_router(category.router)
 app.include_router(tag.router)
 app.include_router(note.router)
 
-
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["http://localhost:5173", "https://xsalgar.com", "https//www.xsalgar.com"],
+    allow_methods=["GET"],
+    allow_headers=["*"],
+    allow_credentials=True
+)
 
 @app.middleware("http")
 async def login_fails_management(request: Request, call_next):

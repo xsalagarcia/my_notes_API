@@ -1,5 +1,4 @@
 from collections.abc import Sequence
-from typing import Tuple, List
 
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import selectinload

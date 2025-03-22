@@ -12,3 +12,5 @@ TODO.md
 /app/note_files
 
 database.db
+
+mynotes-systemd.service

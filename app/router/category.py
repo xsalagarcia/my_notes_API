@@ -41,3 +41,8 @@ def delete_category(cookie: Annotated[str, Depends(check_admin_session)], id: in
 @router.get("/with_all", response_model=list[CategoryWithAllResponseModel])
 def get_categories_with_all():
     return service.get_categories_with_all()
+
+
+@router.post("/refresh")
+def refresh_all_public_content(cookie: Annotated[str, Depends(check_admin_session)]):
+    service.refresh_all_public_content()
