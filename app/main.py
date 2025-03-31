@@ -17,11 +17,15 @@ app.include_router(note.router)
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:5173", "https://xsalgar.com", "https//www.xsalgar.com"],
+    allow_origins=["http://localhost:5173", "https://xsalgar.com", "https://www.xsalgar.com"],
     allow_methods=["GET"],
     allow_headers=["*"],
     allow_credentials=True
 )
+
+@app.get("/")
+def root():
+    return {}
 
 @app.middleware("http")
 async def login_fails_management(request: Request, call_next):
